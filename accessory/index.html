@@ -4,6 +4,7 @@
 <head>
     <title>Car Accessories</title>
     <link rel="stylesheet" href="/css/global.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
 
 </head>
  
@@ -42,21 +43,32 @@
     <script>
  
         function addToProductList() {
-            var accessory = document.getElementById("accessory").value;
-            var accessoryName = document.getElementById("accessory").innerText;
-            var amount = document.getElementById("amount").value;
+            var accessory = $("#accessory").val();
+            // var accessory = document.getElementById("accessory").value;
+            var accessoryName = $('#accessory option:selected').text()
+            // var accessoryName = $("#accessory").html();
+            // var accessoryName = document.getElementById("accessory").innerText;
+            var amount = $("#amount").val();
+            // var amount = document.getElementById("amount").value;
             var price = calculatePrice(accessory);
  
-            var table = document.getElementById("productList");
-            var row = table.insertRow(-1);
-            var accessoryCell = row.insertCell(0);
-            var amountCell = row.insertCell(1);
-            var priceCell = row.insertCell(2);
- 
-            accessoryCell.innerHTML = accessory;
-            amountCell.innerHTML = amount;
-            priceCell.innerHTML = "$" + price;
- 
+            $("#productList").append(
+                $("<tr>").append(
+                    $("<td>").text(accessory),
+                    $("<td>").text(amount),
+                    $("<td>").text("$" + price)
+                    )
+                );
+            // var table = document.getElementById("productList");
+            // var row = table.insertRow(-1);
+            // var accessoryCell = row.insertCell(0);
+            // var amountCell = row.insertCell(1);
+            // var priceCell = row.insertCell(2);
+            //
+            // accessoryCell.innerHTML = accessory;
+            // amountCell.innerHTML = amount;
+            // priceCell.innerHTML = "$" + price;
+
             updatePrice(price);
         }
  
@@ -78,14 +90,18 @@
         var grossPrice = 0
         var vatRate = 0.07
         function updatePrice(price) {
-            var grossPriceElement = document.getElementById("grossPrice");
+            var grossPriceElement = $("#grossPrice");
+            // var grossPriceElement = document.getElementById("grossPrice");
             // var grossPrice = parseFloat(grossPriceElement.innerHTML);
             console.log(grossPrice,price)
             grossPrice += price;
             let vatAmount = grossPrice * vatRate;
-            grossPriceElement.innerHTML = grossPrice.toFixed(2);
-            document.getElementById("vatAmount").textContent = vatAmount.toFixed(2);
-            document.getElementById("netPrice").textContent = (grossPrice + vatAmount).toFixed(2);
+            grossPriceElement.html(grossPrice.toFixed(2));
+            // grossPriceElement.innerHTML = grossPrice.toFixed(2);
+            $("#vatAmount").html(vatAmount.toFixed(2));
+            // document.getElementById("vatAmount").textContent = vatAmount.toFixed(2);
+            $("#netPrice").html((grossPrice + vatAmount).toFixed(2));
+            // document.getElementById("netPrice").textContent = (grossPrice + vatAmount).toFixed(2);
         }
 
     </script>

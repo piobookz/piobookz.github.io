@@ -50,7 +50,7 @@
             // var accessoryName = document.getElementById("accessory").innerText;
             var amount = $("#amount").val();
             // var amount = document.getElementById("amount").value;
-            var price = calculatePrice(accessory);
+            var price = calculatePrice(accessory, amount);
  
             $("#productList").append(
                 $("<tr>").append(
@@ -72,19 +72,19 @@
             updatePrice(price);
         }
  
-        function calculatePrice(accessory) {
+        function calculatePrice(accessory, amount) {
             // Add your own logic to calculate the price based on the selected accessory
             switch (accessory) {
                 case "p123":
-                    return 50;
+                    return 50 * amount;
                 case "p234":
-                    return 30;
+                    return 30 * amount;
                 case "p456":
-                    return 20;
+                    return 20 * amount;
                 case "p996":
-                    return 40;
+                    return 40 * amount;
                 default:
-                    return 0;
+                    return 0 * amount;
             }
         }
         var grossPrice = 0

@@ -35,6 +35,12 @@ function App() {
     setDataItems(newDataItems);
   }
 
+  const deleteAllIndex = () => {
+    let newDataItems = [...dataItems];
+    newDataItems.splice(0, newDataItems.length);
+    setDataItems(newDataItems);
+  }
+
   const productChange = () => {
     let item = products.find((v) => itemRef.current.value === v.code)
     setPpu(item.price)
@@ -80,7 +86,8 @@ function App() {
         <Col md={8}>
           <QuotationTable
             data={dataItems}
-            deleteByIndex={deleteByIndex} />
+            deleteByIndex={deleteByIndex}
+            deleteAllIndex={deleteAllIndex} />
         </Col>
       </Row>
     </Container>

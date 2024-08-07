@@ -9,7 +9,7 @@ import { BsFillTrashFill } from "react-icons/bs";
 
 import style from "./mystyle.module.css";
 
-function QuotationTable({ data, deleteByIndex }) {
+function QuotationTable({ data, deleteByIndex, deleteAllIndex }) {
 
   // Guard condition
   if (!data || data.length === 0) {
@@ -27,10 +27,14 @@ function QuotationTable({ data, deleteByIndex }) {
     deleteByIndex(index)
   }
 
+  const handleClear = () => {
+    deleteAllIndex()
+  };
+
   return (
     <Container>
       <h1>Quotation</h1>
-      <Button variant="outline-dark">
+      <Button variant="outline-dark" onClick={handleClear}>
         <MdClear /> Clear
       </Button>
       <Table striped bordered hover>
